@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="sa.com.xceed.misbar"/>
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <bean id="mongo" class="sa.com.xceed.misbar.utils.MongoUtils" factory-method="getMongo">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.MisbarCustomerMongoDAO" factory-method="getInstance">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+        <constructor-arg value="${db.files.mongodb.dbname}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.MisbarUserMongoDAO" factory-method="getInstance">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+        <constructor-arg value="${db.files.mongodb.dbname}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.FilesMongoDAO" factory-method="getInstance">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+        <constructor-arg value="${db.files.mongodb.dbname}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.DigestNotificationDAO" factory-method="getInstance">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+        <constructor-arg value="${db.files.mongodb.dbname}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.facebook.PostsDAO" factory-method="getInstance">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+        <constructor-arg value="${db.facebook.mongodb.dbname}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.facebook.PagesDAO" factory-method="getInstance">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+        <constructor-arg value="${db.facebook.mongodb.dbname}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.twitter.TwitterTweetsDAO" factory-method="getInstance">
+        <constructor-arg value="${db.twitter.mongodb.server.port}" />
+        <constructor-arg value="${db.twitter.mongodb.server}" />
+        <constructor-arg value="${db.twitter.mongodb.name}" />
+    </bean>
+
+    <bean class="sa.com.xceed.misbar.dao.youtube.VideoDAO" factory-method="getInstance">
+        <constructor-arg value="${db.files.mongodb.server.port}" />
+        <constructor-arg value="${db.files.mongodb.server}" />
+        <constructor-arg value="${db.youtube.mongodb.name}" />
+    </bean>
+
+</beans>
